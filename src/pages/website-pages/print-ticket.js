@@ -142,7 +142,7 @@ const PrintTicket = () => {
 
               <div className="ticket-div-info" style={{marginLeft:"60px", height:"130px"}} >
                 <div className="qr-code-div">
-                  <QRCode size={80} value={ticketHTML} />
+                  <QRCode size={150} value={ticketHTML} />
                 </div>
                 <div className="inside-content-div">
                   {formattedDate} - {ticketData.ticket_number} <br></br> <b>{ticketData.selected_pass}</b>
