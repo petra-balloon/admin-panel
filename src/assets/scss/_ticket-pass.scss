@@ -1,0 +1,66 @@
+.ticket-outer-class{
+    width:867px;
+    height:208px;
+    /* border:1px solid red; */
+}
+
+.img-div{
+    width:200px;
+    height: 206px;
+    /* background-color: black; */
+    /* border-color: 2px solid red; */
+}
+
+.outer-ticket-content-div{
+    width:465px;
+    height: 206px;
+}
+
+.logo-div-tiket{
+    width:367px;
+    height: 65px;
+    /* background-color: black; */
+}
+
+.ticket-div-info{
+    display: flex;
+    align-items: center;
+    width:500px;
+    height: 192px;
+}
+
+.inside-content-div{
+    padding: 15px;
+    font-size: 18px;
+}
+
+.qr-code-div{
+    margin-left: 5px;
+}
+
+.company-info-div{
+    width:367px;
+    height: 76px;
+    /* background-color: black; */
+}
+
+
+//transparent div
+.transparent-div {
+    /* background-color: rgba(255, 255, 255, 0.5); */ /* Change the last value (0.5) to adjust transparency */
+    width: 100px; /* Adjust width to your preference */
+    height: 50px; /* Adjust height to your preference */
+    /* Add other styles as needed */
+  }
+
+  .transparent-div-above {
+    width:465px;
+    height : 100px;
+    background-color: red;
+  }
+
+
+  .outer-div-qr-code{
+    display: flex;
+    margin-top: 70px;
+  }
