@@ -2570,11 +2570,11 @@
   "version" "2.1.4"
 
 "@restart/hooks@^0.4.7":
-  "integrity" "sha512-3BekqcwB6Umeya+16XPooARn4qEPW6vNvwYnlofIYe6h9qG1/VeD7UvShCWx11eFz5ELYmwIEshz+MkPX3wjcQ=="
-  "resolved" "https://registry.npmjs.org/@restart/hooks/-/hooks-0.4.9.tgz"
-  "version" "0.4.9"
+  "integrity" "sha512-Ft/ncTULZN6ldGHiF/k5qt72O8JyRMOeg0tApvCni8LkoiEahO+z3TNxfXIVGy890YtWVDvJAl662dVJSJXvMw=="
+  "resolved" "https://registry.npmjs.org/@restart/hooks/-/hooks-0.4.11.tgz"
+  "version" "0.4.11"
   dependencies:
-    "dequal" "^2.0.2"
+    "dequal" "^2.0.3"
 
 "@rollup/plugin-babel@^5.2.0":
   "integrity" "sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q=="
@@ -5535,7 +5535,7 @@
   "resolved" "https://registry.npmjs.org/depd/-/depd-1.1.2.tgz"
   "version" "1.1.2"
 
-"dequal@^2.0.2":
+"dequal@^2.0.3":
   "integrity" "sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA=="
   "resolved" "https://registry.npmjs.org/dequal/-/dequal-2.0.3.tgz"
   "version" "2.0.3"
@@ -7638,9 +7638,9 @@
   "version" "9.0.16"
 
 "immutable@^3.8.2 || ^4.0.0", "immutable@3.x.x || 4.x.x":
-  "integrity" "sha512-0AOCmOip+xgJwEVTQj1EfiDDOkPmuyllDuTuEX+DDXUgapLAsBIfkg3sxCYyCEA8mQqZrrxPUGjcOQ2JS3WLkg=="
-  "resolved" "https://registry.npmjs.org/immutable/-/immutable-4.3.0.tgz"
-  "version" "4.3.0"
+  "integrity" "sha512-lj9cnmB/kVS0QHsJnYKD1uo3o39nrbKxszjnqS9Fr6NB7bZzW45U6WSGBPKXDL/CvDKqDNPA4r3DoDQ8GTxo2A=="
+  "resolved" "https://registry.npmjs.org/immutable/-/immutable-4.3.1.tgz"
+  "version" "4.3.1"
 
 "immutable@~3.7.4":
   "integrity" "sha512-AizQPcaofEtO11RZhPPHBOJRdo/20MKQF9mBLnVkBoyHi1/zXK8fzVdnEpSV9gxqtnh6Qomfp3F0xT5qP/vThw=="
