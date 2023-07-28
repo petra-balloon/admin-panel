@@ -79,125 +79,119 @@ const ThirdModal = ({
   /* timer */
   //const API_URL = "http://localhost:5000/api/";
   const handleToken = async () => {
-    setIsLoading(true)
-    const usertoken = JSON.parse(localStorage.getItem("authUser"))
-    console.log("this is user token to be send", usertoken)
-    const config = {
-      headers: {
-        authorization: `bearer ${usertoken}`,
-      },
-    }
-    await axios
-      .post(
-        `${API_URL}ticket/payment/pos`,
-        {
-          amount: `${resData.total_amount}`, // Replace with the desired amount
-          currency: "USD",
-          user_information: {
-            country: country,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            mobile: mobile,
-            ticketId: resData._id,
-          },
+    if (isValidationComfirm == true) {
+      setIsLoading(true)
+      const usertoken = JSON.parse(localStorage.getItem("authUser"))
+      console.log("this is user token to be send", usertoken)
+      const config = {
+        headers: {
+          authorization: `bearer ${usertoken}`,
         },
-        config
-      )
-      .then(async response => {
-        console.log(response)
-        setSecondModal("payment")
-
-        if (response.data.message == "Update successful") {
-          setMerchantSession(response.data.data.session.id)
+      }
+      await axios
+        .post(
+          `${API_URL}ticket/payment/pos`,
+          {
+            amount: `${resData.total_amount}`, // Replace with the desired amount
+            currency: "USD",
+            user_information: {
+              country: country,
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              mobile: mobile,
+              ticketId: resData._id,
+            },
+          },
+          config
+        )
+        .then(async response => {
+          console.log(response)
           setSecondModal("payment")
-          //setTicketData(response.data.data);
-          // closeModal();
-          // Swal.fire({
-          //   title: "Success",
-          //   text: "Payment successful email is send to your email address",
-          //   icon: "success",
-          //   confirmButtonText: "OK",
-          // })
-          // .then(function () {
-          //     // Redirect the user
-          //     window.location.href = "/tickets";
-          //   });
 
-          // setSecondModal("fifth");
-          setIsLoading(false)
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong please try again!",
-          confirmButtonText: "OK",
-        }).then(function () {
-          // Redirect the user
-          window.location.href = "/tickets"
+          if (response.data.message == "Update successful") {
+            setMerchantSession(response.data.data.session.id)
+            setSecondModal("payment")
+            setIsLoading(false)
+          }
         })
-      })
-  }
-
-  const handleTokenCash = async () => {
-    setIsLoading(true)
-    const usertoken = JSON.parse(localStorage.getItem("authUser"))
-    console.log("this is user token to be send", usertoken)
-    const config = {
-      headers: {
-        authorization: `bearer ${usertoken}`,
-      },
-    }
-    await axios
-      .post(
-        `${API_URL}ticket/payment/pos/cash`,
-        {
-          amount: `${resData.total_amount}`, // Replace with the desired amount
-          currency: "USD",
-          user_information: {
-            country: country,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            mobile: mobile,
-            ticketId: resData._id,
-          },
-        },
-        config
-      )
-      .then(async response => {
-        console.log("cash response",response)
-        if (response.data.message == "Update successful") {
-          closeModal()
+        .catch(function (error) {
+          console.log(error)
           Swal.fire({
-            title: "Success",
-            text: "Payment successful email is send to your email address",
-            icon: "success",
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong please try again!",
             confirmButtonText: "OK",
           }).then(function () {
             // Redirect the user
-            window.location.href = "/tickets";
+            window.location.href = "/tickets"
           })
-
-          // setSecondModal("fifth");
-          setIsLoading(false)
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong please try again!",
-          confirmButtonText: "OK",
-        }).then(function () {
-          // Redirect the user
-          window.location.href = "/tickets"
         })
-      })
+    } else {
+    
+    }
+  }
+
+  const handleTokenCash = async () => {
+    if (isValidationComfirm == true) {
+      setIsLoading(true)
+      const usertoken = JSON.parse(localStorage.getItem("authUser"))
+      console.log("this is user token to be send", usertoken)
+      const config = {
+        headers: {
+          authorization: `bearer ${usertoken}`,
+        },
+      }
+      await axios
+        .post(
+          `${API_URL}ticket/payment/pos/cash`,
+          {
+            amount: `${resData.total_amount}`, // Replace with the desired amount
+            currency: "USD",
+            user_information: {
+              country: country,
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              mobile: mobile,
+              ticketId: resData._id,
+            },
+          },
+          config
+        )
+        .then(async response => {
+          console.log("cash response", response)
+          if (response.data.message == "Update successful") {
+            closeModal()
+            Swal.fire({
+              title: "Success",
+              text: "Payment successful email is send to your email address",
+              icon: "success",
+              confirmButtonText: "OK",
+            }).then(function () {
+              // Redirect the user
+              window.location.href = "/tickets"
+            })
+
+            // setSecondModal("fifth");
+            setIsLoading(false)
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong please try again!",
+            confirmButtonText: "OK",
+          }).then(function () {
+            // Redirect the user
+            window.location.href = "/tickets"
+          })
+        })
+    }else{
+      alert("please fill input field")
+    }
   }
 
   const handlFromValidation = async token => {
@@ -290,7 +284,9 @@ const ThirdModal = ({
 
                 <div className="row">
                   <div className="col-lg-8">
-                    <div className="third-pass-details">{resData.selected_pass}</div>
+                    <div className="third-pass-details">
+                      {resData.selected_pass}
+                    </div>
                   </div>
                   <div className="col-lg-4">
                     <div className="third-total-recipt-price">

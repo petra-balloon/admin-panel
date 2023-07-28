@@ -165,6 +165,11 @@ const TicketPage = () => {
         sort: "asc",
       },
       {
+        label: "Payment Status",
+        field: "payment_status",
+        sort: "asc",
+      },
+      {
         label: "Action",
         field: "action",
         sort: "asc",
@@ -180,6 +185,7 @@ const TicketPage = () => {
         selected_pass: item.selected_pass,
         discount_amount: item.discount_amount,
         total_amount: item.total_amount,
+        payment_status : item.payment_status,
         check_in: (
           <div>
             {item.check_in == true && <div>Check In</div>}
