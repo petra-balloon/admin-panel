@@ -19,7 +19,8 @@ const UserRoleState = props => {
         password: password,
       })
       .then(async response => {
-        console.log(response)
+        //console.log(response)
+        console.log("data==>>>>",response.data.data);
         if (response.data.status) {
           localStorage.setItem(
             "authUser",
@@ -29,9 +30,11 @@ const UserRoleState = props => {
           toastSuccess(response.data.message)
           await UserRole(token)
           if(response.data.data.role === "subadmin"){
-            navigate("/pricingplan")
-          }else{
+            navigate("/tickets")
+          }else if(response.data.data.role === "superadmin"){
             navigate("/dashboard")
+          }else{
+            navigate("/reports")
           }
           
           setIsLoading(false)

@@ -137,6 +137,7 @@ const RedeemPopUpModal = ({
         boardingPassData.push({
           type: itemType,
           boardingNumber: randomNumber,
+          selected_pass: editTicketDetails.selected_pass
         })
       }
     }
@@ -228,6 +229,7 @@ const RedeemPopUpModal = ({
         allReadyRedeem.push({
           type: "adult",
           quantity: preNumber,
+          selected_pass: editTicketDetails.selected_pass
         })
 
         for (let i = 0; i < currentallRedeem.length; i++) {
@@ -239,6 +241,7 @@ const RedeemPopUpModal = ({
         currentallRedeem.push({
           type: "adult",
           quantity: selectedNumberNew,
+          selected_pass: editTicketDetails.selected_pass
         })
         //console.log('this is currentallRedeem',currentallRedeem)
         console.log(allReadyRedeem)
@@ -278,6 +281,7 @@ const RedeemPopUpModal = ({
         allReadyRedeem.push({
           type: "child",
           quantity: preNumber,
+          selected_pass: editTicketDetails.selected_pass
         })
 
         for (let i = 0; i < currentallRedeem.length; i++) {
@@ -289,6 +293,7 @@ const RedeemPopUpModal = ({
         currentallRedeem.push({
           type: "child",
           quantity: selectedNumberNew,
+          selected_pass: editTicketDetails.selected_pass
         })
         console.log(allReadyRedeem)
       }
@@ -327,6 +332,7 @@ const RedeemPopUpModal = ({
         allReadyRedeem.push({
           type: "infant",
           quantity: preNumber,
+          selected_pass: editTicketDetails.selected_pass
         })
 
         for (let i = 0; i < currentallRedeem.length; i++) {
@@ -338,6 +344,7 @@ const RedeemPopUpModal = ({
         currentallRedeem.push({
           type: "infant",
           quantity: selectedNumberNew,
+          selected_pass: editTicketDetails.selected_pass
         })
 
         console.log(allReadyRedeem)
@@ -554,7 +561,7 @@ const RedeemPopUpModal = ({
                                 //await closeModal()
                               }}
                             >
-                              Redeem Ticket
+                              Print Ticket
                             </button>
                             {btnWarning && (
                               <label style={{ color: "red" }}>

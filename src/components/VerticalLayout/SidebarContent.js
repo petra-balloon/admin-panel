@@ -153,14 +153,18 @@ const SidebarContent = props => {
           <ul className="metismenu list-unstyled" id="side-menu">
             {adminRole == "superadmin" && (
               <div>
-                <li style={{ color: "#02a499", marginLeft:"7px" }}>{props.t("Main")} </li>
+                <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                  {props.t("Main")}{" "}
+                </li>
                 <li>
                   <Link to="/dashboard" className="waves-effect">
                     <i className="ti-home"></i>
                     <span>{props.t("Dashboard")}</span>
                   </Link>
                 </li>
-                <li style={{ color: "#02a499", marginLeft:"7px" }}>{props.t("Promo Code")} </li>
+                <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                  {props.t("Promo Code")}{" "}
+                </li>
                 <li>
                   <Link to="/promo-code" className="waves-effect">
                     {/* <i className="ti-face-smile"></i> */}
@@ -172,7 +176,10 @@ const SidebarContent = props => {
                     <span>{props.t("Promo Reports")}</span>
                   </Link>
                 </li>
-                <li className="" style={{ color: "#02a499", marginLeft:"7px" }}>
+                <li
+                  className=""
+                  style={{ color: "#02a499", marginLeft: "7px" }}
+                >
                   {props.t("Pricing Plan")}
                 </li>
                 <li>
@@ -182,36 +189,45 @@ const SidebarContent = props => {
                 </li>
               </div>
             )}
-            <li style={{ color: "#02a499", marginLeft:"7px" }}>{props.t("Tickets")}</li>
-            <li>
-              <Link to="/#" className="has-arrow waves-effect">
-                <i className="ti-package"></i>
-                <span>{props.t("Tickets")}</span>
-              </Link>
-              <ul className="sub-menu" aria-expanded="false">
-                {/* <li>
-                  <Link to="/project">{props.t("Projects")}</Link>
-                </li>
-                */}
-                <li>
-                  <Link to="/tickets">{props.t("All Tickets")}</Link>
-                </li>
-                <li>
-                  <Link to="/cancel-ticket">{props.t("Cancel Tickets")}</Link>
-                </li>
-                <li>
-                  <Link to="/reservation-reports">
-                    {props.t("Reservation Reports")}
-                  </Link>
-                </li>
-                {/* <li>
-                  <Link to="/teammember">{props.t("Team Members")}</Link>
-                </li>
-                <li>
-                  <Link to="/contact">{props.t("Contact Us")}</Link>
-                </li> */}
-              </ul>
-            </li>
+
+            { adminRole != "government" &&(
+                <div>
+                  <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                    {props.t("Tickets")}
+                  </li>
+                  <li>
+                    <Link to="/#" className="has-arrow waves-effect">
+                      <i className="ti-package"></i>
+                      <span>{props.t("Tickets")}</span>
+                    </Link>
+                    <ul className="sub-menu" aria-expanded="false">
+                      {/* <li>
+                <Link to="/project">{props.t("Projects")}</Link>
+              </li>
+              */}
+                      <li>
+                        <Link to="/tickets">{props.t("All Tickets")}</Link>
+                      </li>
+                      <li>
+                        <Link to="/cancel-ticket">
+                          {props.t("Cancel Tickets")}
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/reservation-reports">
+                          {props.t("Reservation Reports")}
+                        </Link>
+                      </li>
+                      {/* <li>
+                <Link to="/teammember">{props.t("Team Members")}</Link>
+              </li>
+              <li>
+                <Link to="/contact">{props.t("Contact Us")}</Link>
+              </li> */}
+                    </ul>
+                  </li>
+                </div>
+              )}
 
             {/* websie-page */}
 
@@ -387,7 +403,9 @@ const SidebarContent = props => {
 
             {adminRole == "superadmin" && (
               <div>
-                <li style={{ color: "#02a499", marginLeft:"7px"}}>Sub Admins</li>
+                <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                  Sub Admins
+                </li>
                 <li>
                   <Link to="/subadmins">
                     <span>{props.t("Sub Admins")}</span>
@@ -398,16 +416,29 @@ const SidebarContent = props => {
                     <span>{props.t("Sub Admins Reports")}</span>
                   </Link>
                 </li>
-                <li style={{ color: "#02a499", marginLeft:"7px"}}>Reports</li>
+                <li style={{ color: "#02a499", marginLeft: "7px" }}>Reports</li>
                 <li>
                   <Link to="/reports" className="waves-effect">
                     <span>{props.t("Reports")}</span>
                   </Link>
                 </li>
-                <li style={{ color: "#02a499", marginLeft:"7px"}}>Social Media</li>
+                <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                  Social Media
+                </li>
                 <li>
                   <Link to="/social-media" className="waves-effect">
                     <span>{props.t("Social Media")}</span>
+                  </Link>
+                </li>
+              </div>
+            )}
+
+            {adminRole == "government" && (
+              <div>
+                <li style={{ color: "#02a499", marginLeft: "7px" }}>Sales Reports</li>
+                <li>
+                  <Link to="/reports" className="waves-effect">
+                    <span>{props.t("Reports")}</span>
                   </Link>
                 </li>
               </div>

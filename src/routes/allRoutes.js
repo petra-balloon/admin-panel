@@ -167,7 +167,6 @@ const userRoutes = [
   { path: "/", component: <Dashboard /> },
 ]
 const subAdminRoutes = [
-  { path: "/pricingplan", component: <PricingPlan /> },
   { path: "/tickets", component: <TicketPage /> },
   { path: "/cancel-ticket", component: <CancelTicketPage /> },
   { path: "/print-ticket", component: <PrintTicket /> },
@@ -178,6 +177,10 @@ const subAdminRoutes = [
   { path: "/boarding-test-page", component: <BoardingTestPage /> },
   { path: "/reservation-reports", component: <ReservationReport /> },
   { path: "/order-confirm", component: <OrderConfirm/> },
+]
+
+const governmentRoutes = [
+  { path: "/reports", component: <Reports /> },
 ]
 
 const authRoutes = [
@@ -192,4 +195,4 @@ const authRoutes = [
   { path: "/page-recoverpw", component: <Recoverpw /> },
 ]
 
-export { userRoutes, authRoutes, subAdminRoutes }
+export { userRoutes, authRoutes, subAdminRoutes,governmentRoutes}

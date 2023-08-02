@@ -165,15 +165,16 @@ const BoardingTestPage = () => {
                       {(() => {
                         console.log("this is type:::::", Details.type)
                         if (Details.type === "adult") {
-                          return <b>{Details.type} +12 years </b>
+                          return <b>Adult +12 years </b>
                         } else if (Details.type === "child") {
-                          return <b>{Details.type} 3-11 Years </b>
+                          return <b>Child 3-11 Years </b>
                         } else if (Details.type === "infant") {
-                          return <b>{Details.type} 0-2 Years</b>
+                          return <b>Infant 0-2 Years</b>
                         } else if (Details.type === "family") {
-                          return <b>{Details.type} 2Adults,2Children</b>
+                          return <b>Family 2Adults,2Children</b>
                         }
                       })()}
+                      <div>{Details.selected_pass}</div>
                       {/* {Details.type == "adult" && (
                       <b>{Details.type} +12 years </b>
                     )} */}

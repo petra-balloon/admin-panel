@@ -235,7 +235,7 @@ const TicketPage = () => {
             >
               Cancel
             </Button>
-            <Button
+            {/* <Button
               style={{ marginLeft: "3px" }}
               color="success"
               className="btn btn-success waves-effect waves-light"
@@ -244,7 +244,7 @@ const TicketPage = () => {
               }}
             >
               Print
-            </Button>
+            </Button> */}
             <Button
               style={{ marginLeft: "3px" }}
               color="primary"

@@ -5,7 +5,12 @@ import { connect } from "react-redux"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 // Import Routes all
-import { userRoutes, authRoutes, subAdminRoutes } from "./routes/allRoutes"
+import {
+  userRoutes,
+  authRoutes,
+  subAdminRoutes,
+  governmentRoutes,
+} from "./routes/allRoutes"
 
 // Import all middleware
 import Authmiddleware from "./routes/middleware/Authmiddleware"
@@ -49,7 +54,7 @@ const App = () => {
   console.log("adminRole======>>>>>>>", adminRole)
 
   useEffect(() => {
-      const token = JSON.parse(localStorage.getItem("authUser"))
+    const token = JSON.parse(localStorage.getItem("authUser"))
 
     if (token === null || undefined) {
     } else {
@@ -112,24 +117,43 @@ const App = () => {
         {/* <Route path={"/logins"} element={<Login />} exact={true} /> */}
 
         <Route>
-          {
-            userRoutes.map((route, idx) => (
-              <Route
-                path={adminRole == "superadmin" &&route.path}
-                element={<Authmiddleware>{adminRole == "superadmin" && route.component}</Authmiddleware>}
-                exact={true}
-              />
-            ))}
+          {userRoutes.map((route, idx) => (
+            <Route
+              path={adminRole == "superadmin" && route.path}
+              element={
+                <Authmiddleware>
+                  {adminRole == "superadmin" && route.component}
+                </Authmiddleware>
+              }
+              exact={true}
+            />
+          ))}
         </Route>
         <Route>
-          {
-            subAdminRoutes.map((route, idx) => (
-              <Route
-                path={adminRole == "subadmin" &&route.path}
-                element={<Authmiddleware>{adminRole == "subadmin" && route.component}</Authmiddleware>}
-                exact={true}
-              />
-            ))}
+          {subAdminRoutes.map((route, idx) => (
+            <Route
+              path={adminRole == "subadmin" && route.path}
+              element={
+                <Authmiddleware>
+                  {adminRole == "subadmin" && route.component}
+                </Authmiddleware>
+              }
+              exact={true}
+            />
+          ))}
+        </Route>
+        <Route>
+          {governmentRoutes.map((route, idx) => (
+            <Route
+              path={adminRole == "government" && route.path}
+              element={
+                <Authmiddleware>
+                  {adminRole == "government" && route.component}
+                </Authmiddleware>
+              }
+              exact={true}
+            />
+          ))}
         </Route>
       </Routes>
       <ToastContainer />

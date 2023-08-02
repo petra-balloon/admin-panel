@@ -1,6 +1,9 @@
 import PropTypes from "prop-types"
 import React, { useState, useEffect } from "react"
 
+import { useContext } from "react"
+import userRoleContext from "context/userRole/userRole-context"
+
 import { connect } from "react-redux"
 import {
   Form,
@@ -42,6 +45,10 @@ const Header = props => {
   const [openModal, setOpenModal] = useState(false)
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
+  const context = useContext(userRoleContext)
+  const { adminRole, UserRole } = context
+  console.log("headerrrrr======>>>>>>>", adminRole)
 
   function toggleFullscreen() {
     if (
@@ -115,23 +122,25 @@ const Header = props => {
                 </span>
               </Link>
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginLeft: "10px",
-              }}
-            >
-              <button
-                color="success"
-                className="btn-lg btn btn-success waves-effect waves-light"
-                onClick={() => {
-                  setOpenModal(true)
+            {adminRole != "government" && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginLeft: "10px",
                 }}
               >
-                Book Now
-              </button>{" "}
-            </div>
+                <button
+                  color="success"
+                  className="btn-lg btn btn-success waves-effect waves-light"
+                  onClick={() => {
+                    setOpenModal(true)
+                  }}
+                >
+                  Book Now
+                </button>{" "}
+              </div>
+            )}
 
             {/* <button type="button" className="btn btn-sm px-3 font-size-24 header-item waves-effect"
               id="vertical-menu-btn"
