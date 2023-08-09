@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import React, { useEffect, useCallback, useRef } from "react"
+import React, { useEffect, useCallback, useRef, useState } from "react"
 
 // //Import Scrollbar
 import SimpleBar from "simplebar-react"
@@ -15,9 +15,71 @@ import { useContext } from "react"
 import userRoleContext from "context/userRole/userRole-context"
 
 const SidebarContent = props => {
+  const [dashboard, setDashboard] = useState(false)
+  const [promoCode, setPromoCode] = useState(false)
+  const [promoReports, setPromoReports] = useState(false)
+  const [pricingPlan, setPricingPlan] = useState(false)
+  const [allTickets, setAllTickets] = useState(false)
+  const [cancelTickets, setCancelTicket] = useState(false)
+  const [reservationReport, setReservationReport] = useState(false)
+  const [subAdmin, setSubAdmin] = useState(false)
+  const [subAdminReports, setSubAdminReports] = useState(false)
+  const [reports, setReports] = useState(false)
+  const [social, setSocialMedia] = useState(false)
+  const [security, setSecurity] = useState(false)
   const context = useContext(userRoleContext)
-  const { adminRole, UserRole } = context
+  const { adminRole, UserRole, accessArray } = context
   console.log("dashboard======>>>>>>>", adminRole)
+  console.log("dashboard======>>>>>>>", accessArray)
+
+  useEffect(() => {
+    setAccessArrayState()
+  }, [])
+
+  const setAccessArrayState = async () => {
+    await accessArray?.forEach(url => {
+      switch (url) {
+        case "/dashboard":
+          setDashboard(true)
+          break
+        case "/promo-code":
+          setPromoCode(true)
+          break
+        case "/promo-reports":
+          setPromoReports(true)
+          break
+        case "/pricingplan":
+          setPricingPlan(true)
+          break
+        case "/tickets":
+          setAllTickets(true)
+          break
+        case "/cancel-ticket":
+          setCancelTicket(true)
+          break
+        case "/reservation-reports":
+          setReservationReport(true)
+          break
+        case "/subadmins":
+          setSubAdmin(true)
+          break
+        case "/report-subadmin":
+          setSubAdminReports(true)
+          break
+        case "/reports":
+          setReports(true)
+          break
+        case "/social-media":
+          setSocialMedia(true)
+          break
+        case "/security-panel":
+          setSecurity(true)
+          break
+        default:
+          break
+      }
+    })
+  }
 
   const location = useLocation()
   const ref = useRef()
@@ -151,298 +213,153 @@ const SidebarContent = props => {
       <SimpleBar style={{ maxHeight: "100%" }} ref={ref}>
         <div id="sidebar-menu">
           <ul className="metismenu list-unstyled" id="side-menu">
-            {adminRole == "superadmin" && (
-              <div>
-                <li style={{ color: "#02a499", marginLeft: "7px" }}>
-                  {props.t("Main")}{" "}
-                </li>
-                <li>
-                  <Link to="/dashboard" className="waves-effect">
-                    <i className="ti-home"></i>
-                    <span>{props.t("Dashboard")}</span>
-                  </Link>
-                </li>
+              {adminRole === "superadmin" || dashboard ? (
+                <div>
+                  <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                    {props.t("Main")}{" "}
+                  </li>
+
+                  <li>
+                    <Link to="/dashboard" className="waves-effect">
+                      <i className="ti-home"></i>
+                      <span>{props.t("Dashboard")}</span>
+                    </Link>
+                  </li>
+                </div>
+              ) : null}
+              {adminRole === "superadmin" || promoCode || promoReports ? (
                 <li style={{ color: "#02a499", marginLeft: "7px" }}>
                   {props.t("Promo Code")}{" "}
                 </li>
+              ) : null}
+
+              {adminRole === "superadmin" || promoCode ? (
                 <li>
                   <Link to="/promo-code" className="waves-effect">
                     {/* <i className="ti-face-smile"></i> */}
                     <span>{props.t("Promo Code")}</span>
                   </Link>
                 </li>
+              ) : null}
+              {adminRole === "superadmin" || promoReports ? (
                 <li>
                   <Link to="/promo-reports" className="waves-effect">
                     <span>{props.t("Promo Reports")}</span>
                   </Link>
                 </li>
-                <li
-                  className=""
-                  style={{ color: "#02a499", marginLeft: "7px" }}
-                >
-                  {props.t("Pricing Plan")}
-                </li>
-                <li>
-                  <li>
-                    <Link to="/pricingplan">{props.t("Pricing Plan")}</Link>
-                  </li>
-                </li>
-              </div>
-            )}
-
-            { adminRole != "government" &&(
+              ) : null}
+              {adminRole === "superadmin" || pricingPlan ? (
                 <div>
-                  <li style={{ color: "#02a499", marginLeft: "7px" }}>
-                    {props.t("Tickets")}
+                  {" "}
+                  <li
+                    className=""
+                    style={{ color: "#02a499", marginLeft: "7px" }}
+                  >
+                    {props.t("Pricing Plan")}
                   </li>
-                  <li>
-                    <Link to="/#" className="has-arrow waves-effect">
-                      <i className="ti-package"></i>
-                      <span>{props.t("Tickets")}</span>
-                    </Link>
-                    <ul className="sub-menu" aria-expanded="false">
-                      {/* <li>
+                    <li>
+                      <Link to="/pricingplan">{props.t("Pricing Plan")}</Link>
+                    </li>
+                </div>
+              ) : null}
+              {adminRole === "superadmin" || allTickets ? (
+                <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                  {props.t("Tickets")}
+                </li>
+              ) : null}
+              {adminRole === "superadmin" ||
+              allTickets ||
+              cancelTickets ||
+              reservationReport ? (
+                <li>
+                  <Link to="/tickets">{props.t("All Tickets")}</Link>
+                </li>
+              ) : null}
+              {/*  <li>
+                <Link to="/#" className="has-arrow waves-effect">
+                  <i className="ti-package"></i>
+                  <span>{props.t("Tickets")}</span>
+                </Link>
+                <ul className="sub-menu" aria-expanded="false"> */}
+              {/* <li>
                 <Link to="/project">{props.t("Projects")}</Link>
               </li>
               */}
-                      <li>
-                        <Link to="/tickets">{props.t("All Tickets")}</Link>
-                      </li>
-                      <li>
-                        <Link to="/cancel-ticket">
-                          {props.t("Cancel Tickets")}
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/reservation-reports">
-                          {props.t("Reservation Reports")}
-                        </Link>
-                      </li>
-                      {/* <li>
-                <Link to="/teammember">{props.t("Team Members")}</Link>
-              </li>
-              <li>
-                <Link to="/contact">{props.t("Contact Us")}</Link>
-              </li> */}
-                    </ul>
-                  </li>
-                </div>
-              )}
-
-            {/* websie-page */}
-
-            {/* websie-page */}
-
-            {/* tickets */}
-
-            {/* tickets */}
-
-            {/*  <li className="menu-title">{props.t("Components")}</li>
-            <li>
-              <Link to="/#" className="has-arrow waves-effect">
-                <i className="ti-package"></i>
-                <span>{props.t("UI Elements")}</span>
-              </Link>
-              <ul className="sub-menu" aria-expanded="false">
+              {adminRole === "superadmin" || cancelTickets ? (
                 <li>
-                  <Link to="/ui-alerts">{props.t("Alerts")}</Link>
+                  <Link to="/cancel-ticket">{props.t("Cancel Tickets")}</Link>
                 </li>
+              ) : null}
+              {adminRole === "superadmin" || reservationReport ? (
                 <li>
-                  <Link to="/ui-buttons">{props.t("Buttons")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-cards">{props.t("Cards")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-carousel">{props.t("Carousel")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-dropdowns">{props.t("Dropdowns")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-grid">{props.t("Grid")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-images">{props.t("Images")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-lightbox">{props.t("Lightbox")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-modals">{props.t("Modals")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-offcanvas">{props.t("Offcanvas")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-rangeslider">{props.t("Range Slider")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-session-timeout">
-                    {props.t("Session Timeout")}
+                  <Link to="/reservation-reports">
+                    {props.t("Reservation Reports")}
                   </Link>
                 </li>
-                <li>
-                  <Link to="/ui-progressbars">{props.t("Progress Bars")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-tabs-accordions">
-                    {props.t("Tabs & Accordions")}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/ui-typography">{props.t("Typography")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-video">{props.t("Video")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-general">{props.t("General")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-colors">{props.t("Colors")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-rating">{props.t("Rating")}</Link>
-                </li>
-                <li>
-                  <Link to="/ui-utilities">{props.t("Utilities")}</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/#" className="waves-effect">
-                <i className="ti-receipt"></i>
-                <span className="badge rounded-pill bg-success float-end">
-                  9
-                </span>
-                <span>{props.t("Forms")}</span>
-              </Link>
-              <ul className="sub-menu" aria-expanded="false">
-                <li>
-                  <Link to="/form-elements">{props.t("Form Elements")}</Link>
-                </li>
-                <li>
-                  <Link to="/form-validation">
-                    {props.t("Form Validation")}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/form-advanced">{props.t("Form Advanced")}</Link>
-                </li>
-                <li>
-                  <Link to="/form-editors">{props.t("Form Editors")}</Link>
-                </li>
-                <li>
-                  <Link to="/form-uploads">{props.t("Form File Upload")} </Link>
-                </li>
-                <li>
-                  <Link to="/form-xeditable">{props.t("Form Xeditable")}</Link>
-                </li>
-                <li>
-                  <Link to="/form-repeater">{props.t("Form Repeater")}</Link>
-                </li>
-                <li>
-                  <Link to="/form-wizard">{props.t("Form Wizard")}</Link>
-                </li>
-                <li>
-                  <Link to="/form-mask">{props.t("Form Mask")}</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/#" className="has-arrow waves-effect">
-                <i className="ti-view-grid"></i>
-                <span>{props.t("Tables")}</span>
-              </Link>
-              <ul className="sub-menu" aria-expanded="false">
-                <li>
-                  <Link to="/tables-basic">{props.t("Basic Tables")}</Link>
-                </li>
-                <li>
-                  <Link to="/tables-datatable">{props.t("Data Tables")}</Link>
-                </li>
-                <li>
-                  <Link to="/tables-responsive">
-                    {props.t("Responsive Table")}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/tables-editable">{props.t("Editable Table")}</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link to="/#" className="has-arrow waves-effect">
-                <i className="ti-face-smile"></i>
-                <span>{props.t("Icons")}</span>
-              </Link>
-              <ul className="sub-menu" aria-expanded="false">
-                <li>
-                  <Link to="/icons-materialdesign">
-                    {props.t("Material Design")}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/icons-fontawesome">{props.t("Font awesome")}</Link>
-                </li>
-                <li>
-                  <Link to="/icons-ion">{props.t("Ion Icons")}</Link>
-                </li>
-                <li>
-                  <Link to="/icons-themify">{props.t("Themify Icons")}</Link>
-                </li>
-                <li>
-                  <Link to="/icons-dripicons">{props.t("Dripicons")}</Link>
-                </li>
-                <li>
-                  <Link to="/icons-typicons">{props.t("Typicons Icons")}</Link>
-                </li>
-              </ul>
-            </li> */}
-
-            {adminRole == "superadmin" && (
-              <div>
+              ) : null}
+              {adminRole === "superadmin" || subAdmin || subAdminReports ? (
                 <li style={{ color: "#02a499", marginLeft: "7px" }}>
                   Sub Admins
                 </li>
+              ) : null}
+              {adminRole === "superadmin" || subAdmin ? (
                 <li>
                   <Link to="/subadmins">
                     <span>{props.t("Sub Admins")}</span>
                   </Link>
                 </li>
+              ) : null}
+              {adminRole === "superadmin" || subAdminReports ? (
                 <li>
                   <Link to="/report-subadmin">
                     <span>{props.t("Sub Admins Reports")}</span>
                   </Link>
                 </li>
-                <li style={{ color: "#02a499", marginLeft: "7px" }}>Reports</li>
-                <li>
-                  <Link to="/reports" className="waves-effect">
-                    <span>{props.t("Reports")}</span>
-                  </Link>
-                </li>
-                <li style={{ color: "#02a499", marginLeft: "7px" }}>
-                  Social Media
-                </li>
-                <li>
-                  <Link to="/social-media" className="waves-effect">
-                    <span>{props.t("Social Media")}</span>
-                  </Link>
-                </li>
-              </div>
-            )}
-
-            {adminRole == "government" && (
-              <div>
-                <li style={{ color: "#02a499", marginLeft: "7px" }}>Sales Reports</li>
-                <li>
-                  <Link to="/reports" className="waves-effect">
-                    <span>{props.t("Reports")}</span>
-                  </Link>
-                </li>
-              </div>
-            )}
+              ) : null}
+              {adminRole === "superadmin" || reports ? (
+                <div>
+                  <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                    Sales Reports
+                  </li>
+                  <li>
+                    <Link to="/reports" className="waves-effect">
+                      <span>{props.t("Reports")}</span>
+                    </Link>
+                  </li>
+                </div>
+              ) : null}
+              {adminRole === "superadmin" || social ? (
+                <div>
+                  <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                    Social Media
+                  </li>
+                  <li>
+                    <Link to="/social-media" className="waves-effect">
+                      <span>{props.t("Social Media")}</span>
+                    </Link>
+                  </li>
+                </div>
+              ) : null}
+            {/* <div>
+              <li style={{ color: "#02a499", marginLeft: "7px" }}>
+                Sales Reports
+              </li>
+              <li>
+                <Link to="/reports" className="waves-effect">
+                  <span>{props.t("Reports")}</span>
+                </Link>
+              </li>
+            </div> */}
+            {adminRole === "superadmin" || security ? (
+            <div>
+              <li style={{ color: "#02a499", marginLeft: "7px" }}>Settings</li>
+              <li>
+                <Link to="/security-panel" className="waves-effect">
+                  <span>{props.t("Security")}</span>
+                </Link>
+              </li>
+            </div>
+            ) : null}
           </ul>
         </div>
       </SimpleBar>

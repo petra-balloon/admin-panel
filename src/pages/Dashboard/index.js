@@ -544,6 +544,7 @@ const Dashboard = props => {
                           <th scope="col">Ticket Number(#)</th>
                           <th scope="col">Name</th>
                           <th scope="col">Selected Pass</th>
+                          <th scope="col">Created_at Date</th>
                           <th scope="col">Reservation Date</th>
                           <th scope="col">Amount</th>
                           <th scope="col">Status</th>
@@ -561,6 +562,11 @@ const Dashboard = props => {
                               </td>
                               <td>
                                 <div>{Details.selected_pass}</div>
+                              </td>
+                              <td>
+                                <Moment format="D/MMM/YYYY">
+                                  {Details.created_at}
+                                </Moment>
                               </td>
                               <td>
                                 <Moment format="D/MMM/YYYY">

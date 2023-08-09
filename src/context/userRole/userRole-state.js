@@ -8,6 +8,7 @@ const UserRoleState = props => {
 
     const [isLoading,setIsLoading] = useState(false);
     const [adminRole, setAdminRole] = useState("");
+    const [accessArray, setAccessArray] = useState([]);
 
     const navigate = useNavigate()
 
@@ -58,7 +59,9 @@ const UserRoleState = props => {
         .post(`${API_URL}admin/user-role`, {}, config)
         .then(async response => {
           console.log(response.data.data.role)
+          console.log("this is acess arry in context",response.data.data.acessArray)
           setAdminRole(response.data.data.role)
+          setAccessArray(response.data.data.acessArray)
           if (response.data.success) {
             /*  toastSuccess(response.data.message) */
             console.log(response.data)
@@ -73,7 +76,7 @@ const UserRoleState = props => {
     }
   }
   return (
-    <userRoleContext.Provider value={{adminLogin,adminRole,UserRole}} >
+    <userRoleContext.Provider value={{adminLogin,adminRole,UserRole,accessArray}} >
       {props.children}
     </userRoleContext.Provider>
   )

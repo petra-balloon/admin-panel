@@ -50,8 +50,9 @@ const App = () => {
   /* const [adminRole, setAdminRole] = useState("") */
 
   const context = useContext(userRoleContext)
-  const { adminRole, UserRole } = context
+  const { adminRole, UserRole, accessArray } = context
   console.log("adminRole======>>>>>>>", adminRole)
+  console.log("AcesssArrayRole======>>>>>>>", accessArray)
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("authUser"))
@@ -61,43 +62,23 @@ const App = () => {
       UserRole(token)
     }
   }, [])
-  /*   const showUserRole = async () => {
-    const token = JSON.parse(localStorage.getItem("authUser"))
-    if (token !== null) {
-      const response = await userRole(token)
-      console.log("response==>>>>", response)
-      setAdminRole(response.data.role)
-    } 
-  } */
 
-  // const UserRole = async event => {
-  //   /* setIsLoading(true) */
-  //   const token = JSON.parse(localStorage.getItem("authUser"))
-  //   console.log("token>>>>>>>>>>>>>>>>>>", token)
-  //   const config = {
-  //     headers: {
-  //       authorization: `bearer ${token}`,
-  //     },
-  //   }
-  //   try {
-  //     await axiosApi
-  //       .post(`${API_URL}admin/user-role`, {}, config)
-  //       .then(async response => {
-  //         console.log(response.data.data.role)
-  //         setAdminRole(response.data.data.role)
-  //         if (response.data.success) {
-  //           /*  toastSuccess(response.data.message) */
-  //           console.log(response.data)
-  //         }
-  //         /* setIsLoading(false) */
-  //       })
-  //       .catch(function (error) {
-  //         /* toastError(error) */
-  //       })
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+  // This is the hasPermission function, which checks if the user has permission to access a specific route.
+  const hasPermission = routePath => {
+    // For the sake of the example, we'll hard-code a user's permissions here.
+    // In a real-world application, this array should come from your backend after authentication.
+    //const userPermissions = ["/reports", "/tickets"]
+
+    return accessArray.includes(routePath)
+  }
+
+  // Now, let's filter the routes based on the user's permissions.
+  const filteredRoutes = userRoutes.filter(route => hasPermission(route.path))
+
+  // Now, filteredRoutes will only contain the routes that the user has permission to access.
+
+  // You can use filteredRoutes to render your routes. For example, using React Router:
+
   return (
     <React.Fragment>
       <Routes>
@@ -113,24 +94,19 @@ const App = () => {
             )
           })}
         </Route>
-        {/* <Route path={"/dashboard"} element={<Dashboard />} exact={true} /> */}
-        {/* <Route path={"/logins"} element={<Login />} exact={true} /> */}
-
         <Route>
           {userRoutes.map((route, idx) => (
             <Route
-              path={adminRole == "superadmin" && route.path}
+              path={adminRole == "superadmin"  && route.path}
               element={
                 <Authmiddleware>
-                  {adminRole == "superadmin" && route.component}
+                  {adminRole == "superadmin"  &&  route.component}
                 </Authmiddleware>
               }
               exact={true}
             />
           ))}
-        </Route>
-        <Route>
-          {subAdminRoutes.map((route, idx) => (
+          {filteredRoutes.map((route, idx) => (
             <Route
               path={adminRole == "subadmin" && route.path}
               element={
@@ -142,7 +118,36 @@ const App = () => {
             />
           ))}
         </Route>
-        <Route>
+        {/* <Route path={"/dashboard"} element={<Dashboard />} exact={true} /> */}
+        {/* <Route path={"/logins"} element={<Login />} exact={true} /> */}
+
+        {/*     <Route>
+          {userRoutes.map((route, idx) => (
+            <Route
+              path={adminRole == "superadmin" && route.path}
+              element={
+                <Authmiddleware>
+                  {adminRole == "superadmin" && route.component}
+                </Authmiddleware>
+              }
+              exact={true}
+            />
+          ))}
+        </Route> */}
+        {/*  <Route>
+          {subAdminRoutes.map((route, idx) => (
+            <Route
+              path={adminRole == "subadmin" && route.path}
+              element={
+                <Authmiddleware>
+                  {adminRole == "subadmin" && route.component}
+                </Authmiddleware>
+              }
+              exact={true}
+            />
+          ))}
+        </Route> */}
+        {/*  <Route>
           {governmentRoutes.map((route, idx) => (
             <Route
               path={adminRole == "government" && route.path}
@@ -154,7 +159,7 @@ const App = () => {
               exact={true}
             />
           ))}
-        </Route>
+        </Route> */}
       </Routes>
       <ToastContainer />
     </React.Fragment>

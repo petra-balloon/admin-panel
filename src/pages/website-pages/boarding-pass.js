@@ -127,7 +127,7 @@ const BoardingTestPage = () => {
   } */
 
   const generateTicketHTML = data => {
-    const htmltoset = `{"ticketNumber": ${data.boardingNumber}, "Passenger" :  "${data.type}", "Date" : "${requireFormat}"}`
+    const htmltoset = `{"ticketNumber": ${data.boardingNumber}, "Passenger" :  "${data.type}", "Date" : "${requireFormat}","selected_pass": "${data.selected_pass}"}`
     return htmltoset
   }
 
@@ -139,7 +139,7 @@ const BoardingTestPage = () => {
           generatePDF()
         }}
       >
-        Generate PDF
+        Print Ticket
       </button>
       {ticketData &&
         ticketData.map(Details => (
@@ -159,22 +159,28 @@ const BoardingTestPage = () => {
                     <div className="qr-code-div">
                       <QRCode size={80} value={generateTicketHTML(Details)} />
                     </div>
-                    <div className="inside-content-div">
-                      Date:{requireFormat} Ticket:{Details.boardingNumber}{" "}
+                    <div className="inside-content-div" style={{fontWeight:"70px",color:"black"}}>
+                      <b >
+                        Date:{requireFormat} Ticket:{Details.boardingNumber}{" "}
+                      </b>
                       <br></br>
-                      {(() => {
-                        console.log("this is type:::::", Details.type)
-                        if (Details.type === "adult") {
-                          return <b>Adult +12 years </b>
-                        } else if (Details.type === "child") {
-                          return <b>Child 3-11 Years </b>
-                        } else if (Details.type === "infant") {
-                          return <b>Infant 0-2 Years</b>
-                        } else if (Details.type === "family") {
-                          return <b>Family 2Adults,2Children</b>
-                        }
-                      })()}
-                      <div>{Details.selected_pass}</div>
+                      <b>
+                        {" "}
+                        {(() => {
+                          console.log("this is type:::::", Details.type)
+                          if (Details.type === "adult") {
+                            return <b>Adult +12 years </b>
+                          } else if (Details.type === "child") {
+                            return <b>Child 3-11 Years </b>
+                          } else if (Details.type === "infant") {
+                            return <b>Infant 0-2 Years</b>
+                          } else if (Details.type === "family") {
+                            return <b>Family 2Adults,2Children</b>
+                          }
+                        })()}
+                      </b>
+                      <b><div>{Details.selected_pass}</div></b>
+                      
                       {/* {Details.type == "adult" && (
                       <b>{Details.type} +12 years </b>
                     )} */}

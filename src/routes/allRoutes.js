@@ -16,6 +16,7 @@ import BoardingTestPage2 from "pages/website-pages/boarding-test-page2"
 import SubAdminReports from "pages/website-pages/sub-admin-reports"
 import SocialMedia from "pages/website-pages/social-media"
 import OrderConfirm from "pages/website-pages/orderConfirm"
+import SecurityPanel from "pages/website-pages/security-panel"
 
 // Profile
 import UserProfile from "../pages/Authentication/user-profile"
@@ -104,6 +105,8 @@ const userRoutes = [
   { path: "/report-subadmin", component: <SubAdminReports /> },
   { path: "/social-media", component: <SocialMedia/> },
   { path: "/order-confirm", component: <OrderConfirm/> },
+  { path: "/security-panel", component: <SecurityPanel/> },
+  
   
   
   
@@ -178,6 +181,9 @@ const subAdminRoutes = [
   { path: "/reservation-reports", component: <ReservationReport /> },
   { path: "/order-confirm", component: <OrderConfirm/> },
 ]
+
+
+//["/dashboard","/cancel-ticket","/print-ticket","/tickets","/pricingplan","/teammember","/subadmins","/promo-code","/promo-reports","/reservation-reports","/reports","/boarding-pass","/boarding-form","/boarding-test-page","/boarding-test-page","/reservation-reports","/order-confirm"]
 
 const governmentRoutes = [
   { path: "/reports", component: <Reports /> },
