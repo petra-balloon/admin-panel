@@ -37,7 +37,9 @@ const ThirdModal = ({
   const [value, setValue] = useState(null)
   const [isopen, setIsOpen] = useState(false)
   const [isValidationComfirm, setIsValidationComfirm] = useState(false)
+  const [isCashValidationComfirm, setIsCashValidationComfirm] = useState(false)
   const [isPaymentBtn, setIsPaymentBtn] = useState(true)
+  const [isCashPaymentBtn, setIsCashPaymentBtn] = useState(true)
 
   const [errors, setErrors] = useState({})
   const [country, setCountry] = useState(null)
@@ -133,7 +135,7 @@ const ThirdModal = ({
   }
 
   const handleTokenCash = async () => {
-    if (isValidationComfirm == true) {
+    if (isCashValidationComfirm == true) {
       setIsLoading(true)
       const usertoken = JSON.parse(localStorage.getItem("authUser"))
       console.log("this is user token to be send", usertoken)
@@ -205,6 +207,17 @@ const ThirdModal = ({
     }
   }
 
+  const CashhandlFromValidation = async token => {
+    if (CashvalidateForm()) {
+      // Submit the form or perform further actions
+      setIsCashValidationComfirm(true)
+      setIsCashPaymentBtn(false)
+      console.log("Form submitted successfully!")
+    } else {
+      console.log("Form error!!!!!")
+    }
+  }
+
   const validateForm = () => {
     let errors = {}
 
@@ -238,6 +251,25 @@ const ThirdModal = ({
     // Regular expression for email validation
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
     return emailRegex.test(email)
+  }
+
+  const CashvalidateForm = () => {
+    let errors = {}
+
+    // Perform validation logic
+    if (!firstName) {
+      errors.firstName = "First Name is required"
+    }
+
+    if (!email) {
+      errors.email = "Email is required"
+    } else if (!isValidEmail(email)) {
+      errors.email = "Invalid email format"
+    }
+
+    setErrors(errors)
+
+    return Object.keys(errors).length === 0
   }
 
   return (
@@ -481,6 +513,7 @@ const ThirdModal = ({
                         <MdOutlineCheckBoxOutlineBlank
                           onClick={async () => {
                             await handlFromValidation()
+                            await CashhandlFromValidation()
                           }}
                           className="check-box-input"
                         />
