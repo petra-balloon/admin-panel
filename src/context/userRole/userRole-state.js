@@ -31,11 +31,11 @@ const UserRoleState = props => {
           toastSuccess(response.data.message)
           await UserRole(token)
           if(response.data.data.role === "subadmin"){
-            navigate("/tickets")
+            navigate("/")
           }else if(response.data.data.role === "superadmin"){
             navigate("/dashboard")
           }else{
-            navigate("/reports")
+            navigate("/")
           }
           
           setIsLoading(false)

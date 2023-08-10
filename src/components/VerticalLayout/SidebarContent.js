@@ -13,6 +13,7 @@ import { Link, useLocation } from "react-router-dom"
 import { withTranslation } from "react-i18next"
 import { useContext } from "react"
 import userRoleContext from "context/userRole/userRole-context"
+import { API_URL, axiosApi } from "helpers/api_helper"
 
 const SidebarContent = props => {
   const [dashboard, setDashboard] = useState(false)
@@ -33,11 +34,35 @@ const SidebarContent = props => {
   console.log("dashboard======>>>>>>>", accessArray)
 
   useEffect(() => {
-    setAccessArrayState()
+    UserRoleAcess()
+    // setAccessArrayState()
   }, [])
 
-  const setAccessArrayState = async () => {
-    await accessArray?.forEach(url => {
+  const UserRoleAcess = async () =>{
+    const token = JSON.parse(localStorage.getItem("authUser"))
+    const config = {
+      headers: {
+        authorization: `bearer ${token}`,
+      },
+    }
+    try {
+      await axiosApi
+        .post(`${API_URL}admin/user-role`, {}, config)
+        .then(async response => {
+          console.log(response.data.data.role)
+          console.log("this is acess arry in context=============>",response.data.data.acessArray)
+          setAccessArrayState(response.data.data.acessArray)
+        })
+        .catch(function (error) {
+          /* toastError(error) */
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const setAccessArrayState = async (array) => {
+    await array?.forEach(url => {
       switch (url) {
         case "/dashboard":
           setDashboard(true)
@@ -67,6 +92,7 @@ const SidebarContent = props => {
           setSubAdminReports(true)
           break
         case "/reports":
+          // alert(1)
           setReports(true)
           break
         case "/social-media":
@@ -207,7 +233,7 @@ const SidebarContent = props => {
       }
     }
   }
-
+console.log("reports0",reports)
   return (
     <React.Fragment>
       <SimpleBar style={{ maxHeight: "100%" }} ref={ref}>
