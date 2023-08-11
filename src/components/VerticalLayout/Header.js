@@ -122,7 +122,26 @@ const Header = props => {
                 </span>
               </Link>
             </div>
-            {adminRole != "government" && (
+            {adminRole === "superadmin"    && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginLeft: "10px",
+                }}
+              >
+                <button
+                  color="success"
+                  className="btn-lg btn btn-success waves-effect waves-light"
+                  onClick={() => {
+                    setOpenModal(true)
+                  }}
+                >
+                  Book Now
+                </button>{" "}
+              </div>
+            )}
+            {adminRole === "subadmin"    && (
               <div
                 style={{
                   display: "flex",

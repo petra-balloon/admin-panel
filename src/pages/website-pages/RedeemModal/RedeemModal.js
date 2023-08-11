@@ -133,7 +133,7 @@ const RedeemPopUpModal = ({
       }
 
       for (let i = 0; i < itemToaPush; i++) {
-        var randomNumber = getRandomNumber(1000, 10000000)
+        var randomNumber = getRandomNumber(100000, 10000000000)
         boardingPassData.push({
           type: itemType,
           boardingNumber: randomNumber,

@@ -138,6 +138,11 @@ const SecurityPanel = () => {
       //accessRoutes.push(event)
       if (!accessRoutes.includes(event)) {
         accessRoutes.push(event)
+      } else {
+        const index = accessRoutes.indexOf(event)
+        if (index !== -1) {
+          accessRoutes.splice(index, 1)
+        }
       }
       console.log("this is change>>>>>>?????????????", accessRoutes)
     } catch (error) {
@@ -148,27 +153,29 @@ const SecurityPanel = () => {
   const getSubadminAcess = async event => {
     setIsLoading(true)
     console.log("event!!!!!!!!!!!!!", event)
-    setDashboard(false);
-    setPromoCode(false);
-    setPromoReports(false);
-    setPricingPlan(false);
-    setPricingPlan(false);
-    setAllTickets(false);
-    setCancelTicket(false);
-    setReservationReport(false);
-    setSubAdmin(false);
-    setSubAdminReports(false);
-    setReports(false);
-    setSocialMedia(false);
-    setSecurity(false);
-
+    setDashboard(false)
+    setPromoCode(false)
+    setPromoReports(false)
+    setPricingPlan(false)
+    setPricingPlan(false)
+    setAllTickets(false)
+    setCancelTicket(false)
+    setReservationReport(false)
+    setSubAdmin(false)
+    setSubAdminReports(false)
+    setReports(false)
+    setSocialMedia(false)
+    setSecurity(false)
 
     try {
       await axiosApi
         .post(`${API_URL}admin/user-get-access`, { _id: event })
         .then(async response => {
           // console.log("this is sunadmin", response.data.data)
-          console.log("consoel.log!!!!!!!!!!!!!!!!!!!!",response.data.data.acessArray)
+          console.log(
+            "consoel.log!!!!!!!!!!!!!!!!!!!!",
+            response.data.data.acessArray
+          )
           setAccessRoutes(response.data.data.acessArray)
           var stateAccessArray = response.data.data.acessArray
           stateAccessArray.forEach(url => {
@@ -305,9 +312,10 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setDashboard(!dashboard)
-                  if (dashboard == false) {
-                    await UpdateArray("/dashboard")
-                  }
+                  await UpdateArray("/dashboard")
+                  // if (dashboard == false) {
+                  //   await UpdateArray("/dashboard")
+                  // }
                 }}
                 checked={dashboard}
               />
@@ -331,9 +339,7 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setPromoCode(!promoCode)
-                  if (promoCode == false) {
-                    await UpdateArray("/promo-code")
-                  }
+                  await UpdateArray("/promo-code")
                 }}
                 checked={promoCode}
               />
@@ -357,9 +363,10 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setPromoReports(!promoReports)
-                  if (promoReports == false) {
-                    await UpdateArray("/promo-reports")
-                  }
+                  await UpdateArray("/promo-reports")
+                  // if (promoReports == false) {
+                  //   await UpdateArray("/promo-reports")
+                  // }
                 }}
                 checked={promoReports}
               />
@@ -383,9 +390,10 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setPricingPlan(!pricingPlan)
-                  if (pricingPlan == false) {
-                    await UpdateArray("/pricingplan")
-                  }
+                  await UpdateArray("/pricingplan")
+                  // if (pricingPlan == false) {
+                  //   await UpdateArray("/pricingplan")
+                  // }
                 }}
                 checked={pricingPlan}
               />
@@ -409,9 +417,10 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setAllTickets(!allTickets)
-                  if (allTickets == false) {
-                    await UpdateArray("/tickets")
-                  }
+                  await UpdateArray("/tickets")
+                  // if (allTickets == false) {
+                  //   await UpdateArray("/tickets")
+                  // }
                 }}
                 checked={allTickets}
               />
@@ -435,9 +444,7 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setCancelTicket(!cancelTickets)
-                  if (cancelTickets == false) {
-                    await UpdateArray("/cancel-ticket")
-                  }
+                  await UpdateArray("/cancel-ticket")
                 }}
                 checked={cancelTickets}
               />
@@ -461,9 +468,7 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setReservationReport(!reservationReport)
-                  if (reservationReport == false) {
-                    await UpdateArray("/reservation-reports")
-                  }
+                  await UpdateArray("/reservation-reports")
                 }}
                 checked={reservationReport}
               />
@@ -488,9 +493,7 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setSubAdmin(!subAdmin)
-                  if (subAdmin == false) {
-                    await UpdateArray("/subadmins")
-                  }
+                  await UpdateArray("/subadmins")
                 }}
                 checked={subAdmin}
               />
@@ -514,9 +517,7 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setSubAdminReports(!subAdminReports)
-                  if (subAdminReports == false) {
-                    await UpdateArray("/report-subadmin")
-                  }
+                  await UpdateArray("/report-subadmin")
                 }}
                 checked={subAdminReports}
               />
@@ -540,9 +541,10 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setReports(!reports)
-                  if (reports == false) {
-                    await UpdateArray("/reports")
-                  }
+                  await UpdateArray("/reports")
+                  // if (reports == false) {
+                  //   await UpdateArray("/reports")
+                  // }
                 }}
                 checked={reports}
               />
@@ -566,9 +568,7 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setSocialMedia(!social)
-                  if (social == false) {
-                    await UpdateArray("/social-media")
-                  }
+                  await UpdateArray("/social-media")
                 }}
                 checked={social}
               />
@@ -592,9 +592,7 @@ const SecurityPanel = () => {
                 onColor="#02a499"
                 onChange={async () => {
                   setSecurity(!security)
-                  if (security == false) {
-                    await UpdateArray("/security-panel")
-                  }
+                  await UpdateArray("/security-panel")
                 }}
                 checked={security}
               />

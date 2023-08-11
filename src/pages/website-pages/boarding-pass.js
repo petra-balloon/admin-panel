@@ -134,13 +134,23 @@ const BoardingTestPage = () => {
   return (
     <>
       <button
+        style={{ marginTop: "200px" ,marginLeft:"20px"}}
+        color="success"
+        className="btn-lg btn btn-success waves-effect waves-light"
+        onClick={() => {
+          generatePDF()
+        }}
+      >
+        Print Ticket
+      </button>{" "}
+      {/* <button
         style={{ marginTop: "200px" }}
         onClick={() => {
           generatePDF()
         }}
       >
         Print Ticket
-      </button>
+      </button> */}
       {ticketData &&
         ticketData.map(Details => (
           <div /* className="ticket-outer-class pdf-page" */>
@@ -159,8 +169,11 @@ const BoardingTestPage = () => {
                     <div className="qr-code-div">
                       <QRCode size={80} value={generateTicketHTML(Details)} />
                     </div>
-                    <div className="inside-content-div" style={{fontWeight:"70px",color:"black"}}>
-                      <b >
+                    <div
+                      className="inside-content-div"
+                      style={{ fontWeight: "70px", color: "black" }}
+                    >
+                      <b>
                         Date:{requireFormat} Ticket:{Details.boardingNumber}{" "}
                       </b>
                       <br></br>
@@ -179,8 +192,10 @@ const BoardingTestPage = () => {
                           }
                         })()}
                       </b>
-                      <b><div>{Details.selected_pass}</div></b>
-                      
+                      <b>
+                        <div>{Details.selected_pass}</div>
+                      </b>
+
                       {/* {Details.type == "adult" && (
                       <b>{Details.type} +12 years </b>
                     )} */}
@@ -192,7 +207,6 @@ const BoardingTestPage = () => {
             </div>
           </div>
         ))}
-
       {/*       {ticketData &&
         ticketData.map((Details) => (
            

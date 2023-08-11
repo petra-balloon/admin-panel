@@ -385,7 +385,7 @@ const ThirdModal = ({
                   </div>
                 </div>
                 {/* redeem gift card */}
-                <div className="spacer-top-total">
+                {/* <div className="spacer-top-total">
                   <div className="row">
                     <div className="biger-pricing-div">
                       <div className="col-lg-8"></div>
@@ -401,7 +401,7 @@ const ThirdModal = ({
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             {/* contact information */}

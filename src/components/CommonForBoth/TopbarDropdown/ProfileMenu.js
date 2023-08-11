@@ -15,13 +15,54 @@ import { Link } from "react-router-dom"
 import withRouter from "components/Common/withRouter"
 
 // users
-import user1 from "../../../assets/images/users/user-4.jpg"
+
+import user2 from "assets/images/users/user-2.jpg"
+
+import { API_URL, Image_URL, axiosApi } from "helpers/api_helper"
 
 const ProfileMenu = props => {
-  // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
 
   const [username, setusername] = useState("Admin")
+  const [profilePic, setProfilePic] = useState()
+  const [isprofilePic, setIsProfilePic] = useState(false)
+  const [fullname, setFullName] = useState("")
+
+  useEffect(() => {
+    UserRoleAcess()
+    // setAccessArrayState()
+  }, [])
+
+  const UserRoleAcess = async () => {
+    const token = JSON.parse(localStorage.getItem("authUser"))
+    const config = {
+      headers: {
+        authorization: `bearer ${token}`,
+      },
+    }
+    try {
+      await axiosApi
+        .post(`${API_URL}admin/user-role`, {}, config)
+        .then(async response => {
+          console.log("response.data.data.image!!!!!!!!!!!!!!!",response.data.data.profilePic)
+          setProfilePic(response.data.data.profilePic)
+          if (response.data.data.profilePic) {
+            setIsProfilePic(true)
+          }
+
+          setFullName(response.data.data.fullName)
+          console.log(
+            ">>>>>>>>>>>>>>>>>>>>>>>>>>headerrrrrrrrrr",
+            response.data.data
+          )
+        })
+        .catch(function (error) {
+          /* toastError(error) */
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   useEffect(() => {
     if (localStorage.getItem("authUser")) {
@@ -50,22 +91,29 @@ const ProfileMenu = props => {
           id="page-header-user-dropdown"
           tag="button"
         >
-          <img
-            className="rounded-circle header-profile-user"
-            src={user1}
-            alt="Header Avatar"
-          />
+          {isprofilePic && (
+            <img
+              className="rounded-circle header-profile-user"
+              src={`${Image_URL}/${profilePic}`}
+              alt="Header Avatar"
+            />
+          )}
+          {!isprofilePic && (
+            <img
+              className="rounded-circle header-profile-user"
+              src={user2}
+              alt="Header Avatar"
+            />
+          )}
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end">
-          <DropdownItem tag="a" href="/profile">
-            {" "}
-            <i className="bx bx-user font-size-16 align-middle me-1" />
-            {props.t("Profile")}{" "}
+          <DropdownItem>
+            <div>{fullname}</div>
           </DropdownItem>
-          <DropdownItem tag="a" href="auth-lock-screen">
+          {/* <DropdownItem tag="a" href="auth-lock-screen">
             <i className="bx bx-lock-open font-size-16 align-middle me-1" />
             {props.t("Lock screen")}
-          </DropdownItem>
+          </DropdownItem>  */}
           <div className="dropdown-divider" />
           <Link to="/logout" className="dropdown-item">
             <i className="bx bx-power-off font-size-16 align-middle me-1 text-danger" />

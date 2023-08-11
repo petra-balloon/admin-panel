@@ -1,16 +1,15 @@
-import { useState , React} from "react";
-import userRoleContext from "./userRole-context";
-import { Link, useNavigate } from "react-router-dom";
-import { toastError, toastSuccess } from "components/Utils";
-import { API_URL, axiosApi} from "helpers/api_helper"
+import { useState, React } from "react"
+import userRoleContext from "./userRole-context"
+import { Link, useNavigate } from "react-router-dom"
+import { toastError, toastSuccess } from "components/Utils"
+import { API_URL, axiosApi } from "helpers/api_helper"
 
 const UserRoleState = props => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [adminRole, setAdminRole] = useState("")
+  const [accessArray, setAccessArray] = useState([])
 
-    const [isLoading,setIsLoading] = useState(false);
-    const [adminRole, setAdminRole] = useState("");
-    const [accessArray, setAccessArray] = useState([]);
-
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const adminLogin = async (email, password) => {
     setIsLoading(true)
@@ -21,7 +20,7 @@ const UserRoleState = props => {
       })
       .then(async response => {
         //console.log(response)
-        console.log("data==>>>>",response.data.data);
+        console.log("data==>>>>", response.data.data)
         if (response.data.status) {
           localStorage.setItem(
             "authUser",
@@ -30,14 +29,14 @@ const UserRoleState = props => {
           const token = JSON.parse(localStorage.getItem("authUser"))
           toastSuccess(response.data.message)
           await UserRole(token)
-          if(response.data.data.role === "subadmin"){
+          console.log("this is dataaaaaaaaaaa!!", response.data.data)
+          if (response.data.data.role === "subadmin") {
             navigate("/")
-          }else if(response.data.data.role === "superadmin"){
+          } else if (response.data.data.role === "superadmin") {
             navigate("/dashboard")
-          }else{
-            navigate("/")
+          } else {
+            navigate("/login")
           }
-          
           setIsLoading(false)
         } else {
           toastError(response.data.message)
@@ -58,13 +57,14 @@ const UserRoleState = props => {
       await axiosApi
         .post(`${API_URL}admin/user-role`, {}, config)
         .then(async response => {
-          console.log(response.data.data.role)
-          console.log("this is acess arry in context",response.data.data.acessArray)
-          setAdminRole(response.data.data.role)
-          setAccessArray(response.data.data.acessArray)
-          if (response.data.success) {
-            /*  toastSuccess(response.data.message) */
-            console.log(response.data)
+          if (response.data.status == false) {
+            console.log("no user fount but token pleease remove token")
+            localStorage.removeItem("authUser");
+          } else {
+            console.log("this is acess arry in contex??????????????????????t")
+            //console.log(response.data.data.role)
+            setAdminRole(response.data.data.role)
+            setAccessArray(response.data.data.acessArray)
           }
           /* setIsLoading(false) */
         })
@@ -76,10 +76,12 @@ const UserRoleState = props => {
     }
   }
   return (
-    <userRoleContext.Provider value={{adminLogin,adminRole,UserRole,accessArray}} >
+    <userRoleContext.Provider
+      value={{ adminLogin, adminRole, UserRole, accessArray }}
+    >
       {props.children}
     </userRoleContext.Provider>
   )
 }
 
-export default UserRoleState;
+export default UserRoleState

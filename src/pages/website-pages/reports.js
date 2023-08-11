@@ -193,7 +193,7 @@ const Reports = props => {
           setTotalUpholdenDiscount(response.data.data.upholdenDiscount)
           setTotalUpholdenAmount(response.data.data.upholdenTotal)
           setTotalNUmberofUpholden(response.data.data.totalNUmberofUpholden)
-          setCancelTotalDicount(response.data.data.cancelTotalDiscount)
+          setCancelTotalDicount(response.data.data.cancelTotal)
           settotalNumberOfCancelTicket(
             response.data.data.totalNumberOfCancelTicket
           )
