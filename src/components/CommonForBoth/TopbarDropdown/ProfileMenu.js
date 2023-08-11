@@ -20,6 +20,7 @@ import user2 from "assets/images/users/user-2.jpg"
 
 import { API_URL, Image_URL, axiosApi } from "helpers/api_helper"
 
+
 const ProfileMenu = props => {
   const [menu, setMenu] = useState(false)
 
@@ -32,7 +33,7 @@ const ProfileMenu = props => {
     UserRoleAcess()
     // setAccessArrayState()
   }, [])
-
+console.log("imageurl>????????????????",Image_URL)
   const UserRoleAcess = async () => {
     const token = JSON.parse(localStorage.getItem("authUser"))
     const config = {
@@ -94,7 +95,7 @@ const ProfileMenu = props => {
           {isprofilePic && (
             <img
               className="rounded-circle header-profile-user"
-              src={`${Image_URL}/${profilePic}`}
+              src={`${Image_URL}${profilePic}`}
               alt="Header Avatar"
             />
           )}

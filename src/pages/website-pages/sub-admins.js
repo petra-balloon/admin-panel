@@ -206,7 +206,6 @@ const SubAdmins = () => {
             emailAddress: editEmail,
             password: editpassword,
             fullName: editusername,
-            role: "subadmin",
             file: editimage,
             id: editId,
           },
