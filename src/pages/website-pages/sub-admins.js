@@ -219,7 +219,8 @@ const SubAdmins = () => {
         .then(async response => {
           if (response.data.status) {
             toastSuccess(response.data.message)
-            setmodal_xlarge(!modal_xlarge)
+          //  setmodal_xlarge(!modal_xlarge)
+          setEdit_xlarge(false)
             await getSubadmin()
             setIsLoading(false)
           } else {
@@ -483,7 +484,7 @@ const SubAdmins = () => {
 
                           <CardBody className="p-4">
                             <div className="p-3">
-                              <Form className="mt-4" action="#">
+                             
                                 <div className="mb-3">
                                   <Label
                                     className="form-label"
@@ -585,13 +586,13 @@ const SubAdmins = () => {
                                         await EditSubAdmin()
                                       }}
                                       className="btn btn-primary w-md waves-effect waves-light"
-                                      type="submit"
+                                     
                                     >
                                       Edit SubAdmin
                                     </button>
                                   </div>
                                 </div>
-                              </Form>
+                              
                             </div>
                           </CardBody>
                         </Card>
