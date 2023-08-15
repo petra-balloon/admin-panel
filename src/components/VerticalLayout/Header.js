@@ -25,6 +25,7 @@ import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu"
 import logodarkImg from "../../assets/images/logopetra.png"
 import logosmImg from "../../assets/images/logopetra.png"
 import logolightImg from "../../assets/images/logopetra.png"
+import logopetra from "../../assets/images/logo.png"
 
 //i18n
 import { withTranslation } from "react-i18next"
@@ -106,19 +107,19 @@ const Header = props => {
             <div className="navbar-brand-box">
               <Link to="/" className="logo logo-dark">
                 <span className="logo-sm">
-                  <img src={logosmImg} alt="" height="50" />
+                  <img src={logopetra} alt="" height="70" />
                 </span>
                 <span className="logo-lg">
-                  <img src={logodarkImg} alt="" height="50" />
+                  <img src={logopetra} alt="" height="70" />
                 </span>
               </Link>
 
               <Link to="/" className="logo logo-light">
                 <span className="logo-sm">
-                  <img src={logosmImg} alt="" height="50" />
+                  <img src={logopetra} alt="" height="50" />
                 </span>
                 <span className="logo-lg">
-                  <img src={logolightImg} alt="" height="50" />
+                  <img src={logopetra} alt="" height="70" />
                 </span>
               </Link>
             </div>
