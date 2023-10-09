@@ -82,6 +82,10 @@ import UiRangeSlider from "../pages/Ui/UiRangeSlider"
 import UiUtilities from "pages/Ui/UiUtilities"
 import UiOffcanvas from "pages/Ui/UiOffcanvas"
 import BlogDetails from "pages/Blog/BlogDetails"
+import { createRequire } from 'module';
+
+var require = createRequire(import.meta.url);
+var module = { exports: {} };
 
 const userRoutes = [
   { path: "/dashboard", component: <Dashboard /> },
