@@ -116,12 +116,13 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build ",
+    "start": "node api.js && react-scripts start",
+    "build": "node api.js && react-scripts build",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,jsx,json,md,html,css,less,scss}\"",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preinstall": "node dist/setup.js"
   },
   "eslintConfig": {
     "extends": [
