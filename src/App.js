@@ -26,6 +26,9 @@ import Login from "pages/Authentication/Login"
 import UserRoleState from "./context/userRole/userRole-state"
 import PricingPlan from "pages/website-pages/pricing-plan"
 import userRoleContext from "context/userRole/userRole-context"
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 // Import Firebase Configuration file
 // import { initFirebaseBackend } from "./helpers/firebase_helper"
@@ -176,4 +179,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(App)
+export default connect(mapStateToProps, null)(App);
+
