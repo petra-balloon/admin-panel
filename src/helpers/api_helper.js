@@ -7,8 +7,14 @@ const token = accessToken
 //apply base url for axios
 //export const API_URL = "http://localhost:5000/api/"
 //export const Image_URL = "http://localhost:5000/static/"
-export const API_URL = "https://api.petraballoon.com/api/"
-export const Image_URL = "https://api.petraballoon.com/static/"
+//bsfore client
+// export const API_URL = "https://api.petraballoon.com/api/"
+// export const Image_URL = "https://api.petraballoon.com/static/"
+//
+export const API_URL = "https://backend.api.luxotel.com/api/"
+export const Image_URL = "https://backend.api.luxotel.com/static/"
+
+//latest
 //export const API_URL = "http://139.59.45.111/api/"
 //render
 //export const API_URL = "https://petra-balloon-backend.onrender.com/api/"
